@@ -39,6 +39,7 @@ const Config = {
             inject: path.join(__dirname, './src/index.html'),
         })
     ],
+    devtool: "source-map"
 }
 
 module.exports = Config;
