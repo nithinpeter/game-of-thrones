@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
+import Game from "./game";
 
 class App extends Component {
     constructor(props) {
@@ -8,15 +9,16 @@ class App extends Component {
     }
 
     render() {
-        return <h1>Hey {this.props.name}!</h1>
+        return <div>
+            <h1>GoT!</h1>
+            <Game />
+        </div> 
     }
 
 }
 
 const mapStateToProps = (state, ownProps) => { 
-    return {
-        name: state.app.name
-    }
+    return {}
 }
 
 export default connect(mapStateToProps)(App);
