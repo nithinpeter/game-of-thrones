@@ -12,13 +12,13 @@ class PickCharacters extends Component {
         const { gameData, isLoading } = this.props;
 
         return !isLoading && <div>
-            <h3>Pick</h3>
-            {
-                gameData.characterTree.map((character) => {
-                    return <Character {...character}/>
-                })
-            }
-            <Character name={"Arya Stark"}/>
+            <div>
+                {
+                    gameData.characterTree.map((character, index) => {
+                        return <Character {...character} key={"char_" + index}/>
+                    })
+                }
+            </div>
         </div>
     }
 

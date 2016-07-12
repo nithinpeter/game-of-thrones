@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import PickCharacters from "./pick-characters";
+import CharactersDropZone from "./characters-drop-zone";
 import * as actions from "../store/actions";
 
 class Game extends Component {
@@ -14,8 +15,8 @@ class Game extends Component {
     }
 
     render() {
-        return <div>
-            <h3>Game</h3>
+        return <div style={style.container}>
+            <CharactersDropZone />
             <PickCharacters />
         </div>
     }
@@ -25,6 +26,12 @@ class Game extends Component {
 const mapStateToProps = (state, ownProps) => { 
     return {
         characters: state.game.characterTree
+    }
+}
+
+const style = {
+    container: {
+        height: "90vh",
     }
 }
 

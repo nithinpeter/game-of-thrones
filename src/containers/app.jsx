@@ -1,7 +1,10 @@
+import styles from "../app.css";
+
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Game from "./game";
+import Header from "./header";
 
 class App extends Component {
     constructor(props) {
@@ -9,8 +12,8 @@ class App extends Component {
     }
 
     render() {
-        return <div>
-            <h1>GoT!</h1>
+        return <div style={style.container}>
+            <Header />
             <Game />
         </div> 
     }
@@ -19,6 +22,12 @@ class App extends Component {
 
 const mapStateToProps = (state, ownProps) => { 
     return {}
+}
+
+const style = {
+    container: {
+        height: "100vh",
+    }
 }
 
 export default connect(mapStateToProps)(App);
