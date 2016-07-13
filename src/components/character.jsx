@@ -4,7 +4,9 @@ import { DragSource } from 'react-dnd';
 
 const characterSource = {
   beginDrag(props) {
-    return {};
+    return {
+        id: props.id
+    };
   }
 };
 

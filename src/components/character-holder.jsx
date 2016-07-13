@@ -4,23 +4,30 @@ import { DropTarget } from 'react-dnd';
 
 const characterTarget = {
   drop(props) {
-      return { success: true }
+      return { dropSuccess: true }
   }
 };
 
 function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
+    isOver: monitor.isOver(),
+    data: monitor.getItem()
   };
 }
 
 
-const CharacterHolder = ({ imageUrl, name, id, connectDropTarget, isOver, success }) => {
-    console.log(isOver)
+const CharacterHolder = ({ imageUrl, name, id, connectDropTarget, isOver, data }) => {
+    console.log(data, id)
     return connectDropTarget(
-        <div style={style.containerStyle}>
-            <img src={""} alt={"Drop here"} style={style.imageStyle}/>        
+        <div>
+            { (isOver && data && (data.id == id)) ? <div style={style.containerStyle}>
+                    <img src={imageUrl} alt={name} style={style.imageStyle}/>
+                    <span>{name}</span>        
+                </div> : <div style={style.containerStyle}>
+                    <img src={""} alt={"Drop here"} style={style.imageStyle}/>        
+                </div>
+            }
         </div>
     )
 }
