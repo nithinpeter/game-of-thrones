@@ -1,9 +1,28 @@
 import React from "react";
+import c from '../helpers/constants';
+import { DropTarget } from 'react-dnd';
 
-const CharacterHolder = ({ imageUrl, name, id }) => {
-    return <div style={style.containerStyle}>
-        <img src={""} alt={"Drop here"} style={style.imageStyle}/>        
-    </div>
+const characterTarget = {
+  drop(props) {
+      return { success: true }
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver()
+  };
+}
+
+
+const CharacterHolder = ({ imageUrl, name, id, connectDropTarget, isOver, success }) => {
+    console.log(isOver)
+    return connectDropTarget(
+        <div style={style.containerStyle}>
+            <img src={""} alt={"Drop here"} style={style.imageStyle}/>        
+        </div>
+    )
 }
 
 const style = {
@@ -12,7 +31,8 @@ const style = {
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        height: 50,
+        height: 100,
+        width: 100,
     },
     imageStyle: {
         borderRadius: "50%",
@@ -21,4 +41,4 @@ const style = {
     }
 }
 
-export default CharacterHolder;
+export default DropTarget(c.ItemTypes.CHARACTER, characterTarget, collect)(CharacterHolder);

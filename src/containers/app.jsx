@@ -5,6 +5,8 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import Game from "./game";
 import Header from "./header";
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 class App extends Component {
     constructor(props) {
@@ -20,15 +22,11 @@ class App extends Component {
 
 }
 
-const mapStateToProps = (state, ownProps) => { 
-    return {}
-}
-
 const style = {
     container: {
         height: "100vh",
     }
 }
 
-export default connect(mapStateToProps)(App);
+export default DragDropContext(HTML5Backend)(App);
 

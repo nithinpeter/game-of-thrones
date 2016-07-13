@@ -1,10 +1,26 @@
 import React from "react";
+import c from "../helpers/constants";
+import { DragSource } from 'react-dnd';
 
-const Character = ({ imageUrl, name, id }) => {
-    return <div style={style.containerStyle}>
+const characterSource = {
+  beginDrag(props) {
+    return {};
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+const Character = ({ imageUrl, name, id, connectDragSource, isDragging }) => {
+
+    return connectDragSource(<div style={style.containerStyle}>
         <img src={imageUrl} alt={name} style={style.imageStyle}/>
-        <span>{name}</span>        
-    </div>
+        <span style={{ color: (isDragging ? "red" : "green") }}>{name}</span>        
+    </div>)
 }
 
 const style = {
@@ -22,4 +38,4 @@ const style = {
     }
 }
 
-export default Character;
+export default DragSource(c.ItemTypes.CHARACTER, characterSource, collect)(Character);
