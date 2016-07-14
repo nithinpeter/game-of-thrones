@@ -14,7 +14,7 @@ class PickCharacters extends Component {
         return !isLoading && <div>
             <div>
                 {
-                    gameData.characterTree.map((character, index) => {
+                    gameData.map((character, index) => {
                         return <Character {...character} key={"char_" + index}/>
                     })
                 }
@@ -26,7 +26,7 @@ class PickCharacters extends Component {
 
 const mapStateToProps = (state, ownProps) => {
     return {
-        gameData: state.game.data,
+        gameData: state.game.characterTree,
         isLoading: state.game.isLoading,
     }
 }

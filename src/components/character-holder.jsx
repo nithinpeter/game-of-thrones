@@ -3,8 +3,8 @@ import c from '../helpers/constants';
 import { DropTarget } from 'react-dnd';
 
 const characterTarget = {
-  drop(props) {
-      return { dropSuccess: true }
+  drop(props, monitor) {
+      props.onDrop(monitor.getItem(), props.id);
   }
 };
 
@@ -17,17 +17,17 @@ function collect(connect, monitor) {
 }
 
 
-const CharacterHolder = ({ imageUrl, name, id, connectDropTarget, isOver, data }) => {
-    console.log(data, id)
+const CharacterHolder = ({ imageUrl, name, id, droppedItemId, connectDropTarget, isOver }) => {
+    console.log(droppedItemId, id)
     return connectDropTarget(
-        <div>
-            { (isOver && data && (data.id == id)) ? <div style={style.containerStyle}>
-                    <img src={imageUrl} alt={name} style={style.imageStyle}/>
-                    <span>{name}</span>        
-                </div> : <div style={style.containerStyle}>
-                    <img src={""} alt={"Drop here"} style={style.imageStyle}/>        
-                </div>
-            }
+        <div style={Object.assign({}, style.containerStyle, (isOver ? style.dragOverStyle : {}))}>
+            {droppedItemId == id ? <div>
+                <img src={imageUrl} alt={name} style={style.imageStyle}/>
+                <span>{name}</span>        
+            </div> : <div>
+                <img src={""} alt={"Drop here"} style={style.imageStyle}/>
+                <span>That was wrong</span>        
+            </div>}
         </div>
     )
 }
@@ -40,6 +40,9 @@ const style = {
         alignItems: "center",
         height: 100,
         width: 100,
+    },
+    dragOverStyle: {
+        background: "pink",
     },
     imageStyle: {
         borderRadius: "50%",

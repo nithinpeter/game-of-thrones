@@ -4,6 +4,8 @@ export const FETCH_GAME_REQUEST = "FETCH_GAME_REQUEST";
 export const FETCH_GAME_SUCCESS = "FETCH_GAME_SUCCESS";
 export const FETCH_GAME_FAILURE = "FETCH_GAME_FAILURE";
 
+export const ITEM_DROPPED = "ITEM_DROPPED";
+
 
 export function fetchGame(dispatch, id) {
 
@@ -22,3 +24,11 @@ export function fetchGame(dispatch, id) {
 
     });
 } 
+
+export function itemDropped(dispatch, droppedItemId, id) {
+    dispatch({
+        type: ITEM_DROPPED,
+        droppedItemId,
+        id,
+    })
+}

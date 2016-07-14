@@ -2,6 +2,8 @@ import * as actions from "../actions/game-actions";
 
 const defaultState = {
   isLoading: true,
+  characterTree: {},
+  characterHolderTree: {},
 };
 
 export default function todos(state = defaultState, action) {
@@ -9,7 +11,13 @@ export default function todos(state = defaultState, action) {
     case actions.FETCH_GAME_REQUEST:
       return { isLoading: true }
     case actions.FETCH_GAME_SUCCESS:
-      return Object.assign({}, { isLoading: false }, { data: action.body })
+      let gameData = Object.assign({}, { isLoading: false }, action.body)
+      gameData.characterHolderTree = action.body.characterTree;
+      return gameData;
+    case actions.ITEM_DROPPED:
+      let characterHolderTree = [...state.characterHolderTree];
+      characterHolderTree[action.id].droppedItemId = action.droppedItemId;
+      return Object.assign({}, state, {characterHolderTree});  
     default:
       return state;
 
