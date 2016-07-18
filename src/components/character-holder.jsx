@@ -38,8 +38,6 @@ const style = {
         flexDirection: "column",
         justifyContent: "space-between",
         alignItems: "center",
-        height: 100,
-        width: 100,
     },
     dragOverStyle: {
         background: "pink",

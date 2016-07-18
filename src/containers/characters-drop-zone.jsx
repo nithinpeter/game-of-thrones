@@ -11,16 +11,35 @@ class CharactersDropZone extends Component {
 
     render() {
         const { gameData, isLoading } = this.props;
-        console.log(gameData);
-        return !isLoading && <div>
-            <div>
-                {
-                    gameData.map((character, index) => {
-                        return <CharacterHolder {...character} key={"char_" + index} onDrop={this.onDrop.bind(this)}/>
-                    })
-                }
+
+        if(!isLoading) {
+            const primaryCharacter = gameData.filter(character => character.isPrimary)[0];
+            const primaryCharacterId = primaryCharacter.id;
+
+            const renderCharacter = (id) => {
+                const character = gameData[id];
+                const relationships = character.relationships;
+
+                return <div>
+                    <CharacterHolder {...character} key={"char_" + id} onDrop={this.onDrop.bind(this)}/>
+                    <div style={style.secondaryContainer}>
+                        { relationships ?
+                            character.relationships.map((item) => {
+                                return renderCharacter(item.relatedTo)
+                            }) : null
+                        }
+                    </div> 
+                </div>
+            }
+
+            return <div className="character-drop-zone"> { renderCharacter(primaryCharacterId) } </div>
+
+        } else {
+            return <div>
+                Loading..
             </div>
-        </div>
+        }
+
     }
 
     onDrop(droppedItem, id) {
@@ -34,6 +53,13 @@ const mapStateToProps = (state, ownProps) => {
     return {
         gameData: state.game.characterHolderTree,
         isLoading: state.game.isLoading,
+    }
+}
+
+const style = {
+    secondaryContainer: {
+        display: "flex",
+        justifyContent: "center"
     }
 }
 

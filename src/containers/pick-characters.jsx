@@ -10,7 +10,7 @@ class PickCharacters extends Component {
 
     render() {
         const { gameData, isLoading } = this.props;
-
+        
         return !isLoading && <div>
             <div>
                 {
