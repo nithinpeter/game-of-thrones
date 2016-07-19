@@ -8,7 +8,7 @@ class Header extends Component {
     }
 
     render() {
-        return <div style={style.container}>
+        return <div style={style.container} className="header-container">
             <h4>GoT!</h4>
         </div> 
     }

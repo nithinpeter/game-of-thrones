@@ -15,7 +15,7 @@ class Game extends Component {
     }
 
     render() {
-        return <div style={style.container}>
+        return <div style={style.container} className="game-center">
             <CharactersDropZone />
             <PickCharacters />
         </div>

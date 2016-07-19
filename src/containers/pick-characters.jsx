@@ -11,14 +11,12 @@ class PickCharacters extends Component {
     render() {
         const { gameData, isLoading } = this.props;
         
-        return !isLoading && <div>
-            <div>
-                {
-                    gameData.map((character, index) => {
-                        return <Character {...character} key={"char_" + index}/>
-                    })
-                }
-            </div>
+        return !isLoading && <div className="pick-character-container">
+            {
+                gameData.map((character, index) => {
+                    return <Character {...character} key={"char_" + index}/>
+                })
+            }
         </div>
     }
 

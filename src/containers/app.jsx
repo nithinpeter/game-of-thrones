@@ -1,4 +1,5 @@
-import styles from "../styles/app.css";
+import appStyle from "../styles/app.styl";
+import coreStyle from "../styles/core.styl";
 
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
@@ -14,7 +15,7 @@ class App extends Component {
     }
 
     render() {
-        return <div style={style.container}>
+        return <div style={style.container} className="app-container">
             <Header />
             <Game />
         </div> 
