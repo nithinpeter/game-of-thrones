@@ -1,6 +1,7 @@
 import React from "react";
 import c from '../helpers/constants';
-import { DropTarget } from 'react-dnd';
+import { DropTarget, DragSource } from 'react-dnd';
+import _ from "lodash";
 
 const characterTarget = {
   drop(props, monitor) {
@@ -8,7 +9,15 @@ const characterTarget = {
   }
 };
 
-function collect(connect, monitor) {
+const characterSource = {
+  beginDrag(props) {
+    return {
+        id: props.id
+    };
+  }
+};
+
+function targetCollect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),
@@ -16,10 +25,25 @@ function collect(connect, monitor) {
   };
 }
 
+function sourceCollect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
 
-const CharacterHolder = ({ isPrimary, id, gameData, droppedItemId = -1, connectDropTarget, isOver }) => {
+
+const CharacterHolder = ({ 
+        isPrimary, 
+        id, 
+        gameData, 
+        droppedItemId = -1, 
+        connectDropTarget, 
+        isOver,
+        connectDragSource, 
+    }) => {
     
-    function renderer(droppedItemId, id, imageUrl?, name?) {
+    function renderer(droppedItemId, id) {
         
         if (droppedItemId == -1) {
             
@@ -61,10 +85,11 @@ const CharacterHolder = ({ isPrimary, id, gameData, droppedItemId = -1, connectD
 
     } else {
         
-        return connectDropTarget( <div className={`${(isOver ? "is-over" : "not-over")} character-holder-container`}>
+        return connectDragSource(connectDropTarget( <div className={`${(isOver ? "is-over" : "not-over")} character-holder-container`}>
             { renderer(droppedItemId, id) }
-        </div>);
+        </div>));
     }
 }
 
-export default DropTarget(c.ItemTypes.CHARACTER, characterTarget, collect)(CharacterHolder);
+export default _.flow(DropTarget(c.ItemTypes.CHARACTER, characterTarget, targetCollect),
+                DragSource(c.ItemTypes.CHARACTER, characterSource, sourceCollect))(CharacterHolder);
