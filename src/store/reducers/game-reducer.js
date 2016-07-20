@@ -17,7 +17,11 @@ export default function todos(state = defaultState, action) {
     case actions.ITEM_DROPPED:
       let characterHolderTree = [...state.characterHolderTree];
       characterHolderTree[action.id].droppedItemId = action.droppedItemId;
-      return Object.assign({}, state, {characterHolderTree});  
+
+      let characterTree = [...state.characterTree];
+      characterTree[action.droppedItemId].isDropped = true;
+
+      return Object.assign({}, state, {characterHolderTree, characterTree});  
     default:
       return state;
 

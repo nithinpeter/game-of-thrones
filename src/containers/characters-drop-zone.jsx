@@ -16,12 +16,12 @@ class CharactersDropZone extends Component {
             const primaryCharacter = gameData.filter(character => character.isPrimary)[0];
             const primaryCharacterId = primaryCharacter.id;
 
-            const renderCharacter = (id) => {
+            const renderCharacter = (id, isPrimary) => {
                 const character = gameData[id];
                 const relationships = character.relationships;
 
                 return <div>
-                    <CharacterHolder {...character} key={"char_" + id} onDrop={this.onDrop.bind(this)}/>
+                    <CharacterHolder isPrimary={isPrimary} gameData={gameData} id={id} droppedItemId={character.droppedItemId} key={"char_" + id} onDrop={this.onDrop.bind(this)}/>
                     <div style={style.secondaryContainer}>
                         { relationships ?
                             character.relationships.map((item) => {
@@ -32,7 +32,7 @@ class CharactersDropZone extends Component {
                 </div>
             }
 
-            return <div className="character-drop-zone"> { renderCharacter(primaryCharacterId) } </div>
+            return <div className="character-drop-zone"> { renderCharacter(primaryCharacterId, true) } </div>
 
         } else {
             return <div>

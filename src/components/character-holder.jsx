@@ -17,35 +17,53 @@ function collect(connect, monitor) {
 }
 
 
-const CharacterHolder = ({ imageUrl, name, id, droppedItemId, connectDropTarget, isOver }) => {
-    console.log(droppedItemId, id)
-    return connectDropTarget(
-        <div style={Object.assign({}, style.containerStyle, (isOver ? style.dragOverStyle : {}))}>
-            {droppedItemId == id ? <div>
-                <img src={imageUrl} alt={name} style={style.imageStyle}/>
-                <span>{name}</span>        
-            </div> : <div>
-                <img src={""} alt={"Drop here"} style={style.imageStyle}/>
-                <span>That was wrong</span>        
-            </div>}
-        </div>
-    )
-}
+const CharacterHolder = ({ isPrimary, id, gameData, droppedItemId = -1, connectDropTarget, isOver }) => {
+    
+    function renderer(droppedItemId, id, imageUrl?, name?) {
+        
+        if (droppedItemId == -1) {
+            
+            return <div>
+                <img src={""} className="image-holder"/>        
+            </div>
 
-const style = {
-    containerStyle: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        alignItems: "center",
-    },
-    dragOverStyle: {
-        background: "pink",
-    },
-    imageStyle: {
-        borderRadius: "50%",
-        width: 40,
-        height: 40,
+        } else if (droppedItemId == id) {
+            
+            const character = gameData[droppedItemId];
+
+            return <div>
+                <img src={character.imageUrl} className="image"/>
+                <span className="name">{character.name}</span>        
+            </div>
+
+        } else {
+
+            const character = gameData[droppedItemId];
+
+            return <div>
+                <img src={character.imageUrl} className="image"/>
+                <span className="name">{character.name}</span>
+                <span className="error">X</span>        
+            </div>
+        }
+    }
+
+    
+    if (isPrimary){
+        const character = gameData[id];
+
+        return <div className="not-over character-holder-container">
+            <div>
+                <img src={character.imageUrl} className="image"/>
+                <span className="name">{character.name}</span>        
+            </div>
+        </div>
+
+    } else {
+        
+        return connectDropTarget( <div className={`${(isOver ? "is-over" : "not-over")} character-holder-container`}>
+            { renderer(droppedItemId, id) }
+        </div>);
     }
 }
 

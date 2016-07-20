@@ -8,6 +8,22 @@
             .secondary 
                 display flex
                 justify-content center
+            .character-holder-container > div
+                display flex
+                flex-direction column
+                align-items center
+                .image
+                    width 5rem
+                    height 5rem
+                    border-radius 50%
+                .image-holder
+                    width 5rem
+                    height 5rem
+                    border-radius 50%
+                    border 3px dashed gray
+            .is-over
+                .image-holder
+                    background gray
         .pick-character-container 
             padding 1rem
             display flex
@@ -19,7 +35,7 @@
                 align-items center
                 .image
                     width 5rem
-                    height 5 rem
+                    height 5rem
                     border-radius 50%
             .dragging
                 opacity 0.5
