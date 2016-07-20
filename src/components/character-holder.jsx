@@ -6,13 +6,16 @@ import _ from "lodash";
 const characterTarget = {
   drop(props, monitor) {
       props.onDrop(monitor.getItem(), props.id);
+  },
+  canDrop(props, monitor) {
+      return !props.droppedItemId;
   }
 };
 
 const characterSource = {
   beginDrag(props) {
     return {
-        id: props.id
+        id: props.droppedItemId
     };
   }
 };

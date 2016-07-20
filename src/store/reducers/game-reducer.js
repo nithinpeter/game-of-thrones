@@ -6,6 +6,32 @@ const defaultState = {
   characterHolderTree: {},
 };
 
+const itemDroppedState = (state, action) => {
+  let characterHolderTree = [...state.characterHolderTree];
+  characterHolderTree.map(characterHolder => {
+    if(characterHolder.droppedItemId == action.droppedItemId) characterHolder.droppedItemId = undefined
+  })
+  characterHolderTree[action.id].droppedItemId = action.droppedItemId;
+
+  let characterTree = [...state.characterTree];
+  characterTree[action.droppedItemId].isDropped = true;
+
+  return {characterHolderTree, characterTree};
+}
+
+const itemDroppedBackState = (state, {id}) => {
+  let characterHolderTree = [...state.characterHolderTree];
+  characterHolderTree.map(characterHolder => {
+    if(characterHolder.droppedItemId == id) characterHolder.droppedItemId = undefined
+  })
+
+  let characterTree = [...state.characterTree];
+  characterTree[id].isDropped = false;
+
+  return {characterHolderTree, characterTree};
+  
+}
+
 export default function todos(state = defaultState, action) {
   switch(action.type) {
     case actions.FETCH_GAME_REQUEST:
@@ -15,13 +41,9 @@ export default function todos(state = defaultState, action) {
       gameData.characterHolderTree = action.body.characterTree;
       return gameData;
     case actions.ITEM_DROPPED:
-      let characterHolderTree = [...state.characterHolderTree];
-      characterHolderTree[action.id].droppedItemId = action.droppedItemId;
-
-      let characterTree = [...state.characterTree];
-      characterTree[action.droppedItemId].isDropped = true;
-
-      return Object.assign({}, state, {characterHolderTree, characterTree});  
+      return Object.assign({}, state, itemDroppedState(state, action));
+    case actions.ITEM_DROPPED_BACK:
+      return Object.assign({}, state, itemDroppedBackState(state, action));
     default:
       return state;
 

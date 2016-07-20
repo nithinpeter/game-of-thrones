@@ -17,9 +17,17 @@ function collect(connect, monitor) {
   }
 }
 
-const Character = ({ imageUrl, name, id, isDropped, connectDragSource, isDragging }) => {
+const Character = ({ 
+        imageUrl, 
+        name, 
+        id, 
+        isDropped, 
+        isPrimary, 
+        connectDragSource, 
+        isDragging,
+      }) => {
 
-    return !isDropped && connectDragSource(<div className={`${(isDragging ? "dragging" : "stationary")} character-container`}>
+    return !isDropped && !isPrimary && connectDragSource(<div className={`${(isDragging ? "dragging" : "stationary")} character-container`}>
         <img src={imageUrl} alt={name} className="image"/>
         <span className="name">{name}</span>        
     </div>)

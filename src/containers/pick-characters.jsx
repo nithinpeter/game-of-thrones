@@ -1,23 +1,24 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import Character from "../components/character";
+import PickCharactersTarget from "../components/pick-characters-target";
+import * as actions from "../store/actions";
 
+// @DropTarget(c.ItemTypes.CHARACTER, pickCharactersTarget, collect)
 class PickCharacters extends Component {
     constructor(props) {
         super(props);
     }
 
+    onDropBack(item) {
+        console.log(item);
+        actions.itemDroppedBack(this.props.dispatch, item.id);
+    }
+
     render() {
         const { gameData, isLoading } = this.props;
         
-        return !isLoading && <div className="pick-character-container">
-            {
-                gameData.map((character, index) => {
-                    return <Character {...character} key={"char_" + index}/>
-                })
-            }
-        </div>
+        return (!isLoading && <PickCharactersTarget gameData={gameData} onDropBack={this.onDropBack.bind(this)}/>);
     }
 
 }
