@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import CharacterHolder from "../components/character-holder";
+import CharacterConnector from "../components/character-connector";
 import * as actions from "../store/actions";
 
 class CharactersDropZone extends Component {
@@ -14,14 +15,33 @@ class CharactersDropZone extends Component {
 
         if(!isLoading) {
             const primaryCharacter = gameData.filter(character => character.isPrimary)[0];
-            const primaryCharacterId = primaryCharacter.id;
-
+            
             const renderCharacter = (id, isPrimary) => {
                 const character = gameData[id];
                 const relationships = character.relationships;
 
-                return <div>
-                    <CharacterHolder isPrimary={isPrimary} gameData={gameData} id={id} droppedItemId={character.droppedItemId} key={"char_" + id} onDrop={this.onDrop.bind(this)}/>
+                return <div className="character-drop-zone-inner-container">
+
+                    <div className="character-holder-connector">
+                        <CharacterHolder isPrimary={isPrimary} 
+                            gameData={gameData} 
+                            id={id} 
+                            droppedItemId={character.droppedItemId} 
+                            key={"char_" + id} 
+                            onDrop={this.onDrop.bind(this)}/>
+                        
+                        <div className="connector-container">
+                            {
+                                relationships && relationships.map((relationship, index) => {
+                                    return <CharacterConnector 
+                                                index={index} 
+                                                relationship={relationship} 
+                                                total={relationships ? relationships.length : 0}/>
+                                })
+                            }
+                        </div>
+                    </div>
+                    
                     <div style={style.secondaryContainer}>
                         { relationships ?
                             character.relationships.map((item) => {
@@ -32,7 +52,7 @@ class CharactersDropZone extends Component {
                 </div>
             }
 
-            return <div className="character-drop-zone"> { renderCharacter(primaryCharacterId, true) } </div>
+            return <div className="character-drop-zone"> { renderCharacter(primaryCharacter.id, true) } </div>
 
         } else {
             return <div>
