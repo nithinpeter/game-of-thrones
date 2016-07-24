@@ -42,7 +42,7 @@ class CharactersDropZone extends Component {
                         </div>
                     </div>
                     
-                    <div style={style.secondaryContainer}>
+                    <div className={"secondary-container children-" + (relationships ? relationships.length : 0)}>
                         { relationships ?
                             character.relationships.map((item) => {
                                 return renderCharacter(item.relatedTo)
@@ -73,13 +73,6 @@ const mapStateToProps = (state, ownProps) => {
     return {
         gameData: state.game.characterHolderTree,
         isLoading: state.game.isLoading,
-    }
-}
-
-const style = {
-    secondaryContainer: {
-        display: "flex",
-        justifyContent: "center"
     }
 }
 
