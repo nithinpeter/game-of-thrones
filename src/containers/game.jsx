@@ -15,7 +15,9 @@ class Game extends Component {
     }
 
     render() {
-        return <div style={style.container} className="game-center">
+        const { isFinished, isLoading } = this.props;
+
+        return isFinished ? <div>Finished</div> : <div className="game-center">
             <CharactersDropZone />
             <PickCharacters />
         </div>
@@ -25,13 +27,8 @@ class Game extends Component {
 
 const mapStateToProps = (state, ownProps) => { 
     return {
-        characters: state.game.characterTree
-    }
-}
-
-const style = {
-    container: {
-        height: "90vh",
+        isFinished: state.game.isFinished,
+        isLoading: state.game.isLoading,
     }
 }
 

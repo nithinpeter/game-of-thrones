@@ -1,10 +1,16 @@
 .app-container
-    .header
+    .header-container
+        background #FDFFFC
+        height 7vh
     .game-center 
         display flex
         flex-direction column
         justify-content space-between
+        background #363636
+        height 93vh
         .character-drop-zone
+            color #fff
+            padding 4rem
             .character-drop-zone-inner-container
                 display flex
                 flex-direction column
@@ -23,6 +29,8 @@
                     margin-top 0
                 .children-2
                     margin-top -145px
+            .character-holder-container
+                z-index 100
             .character-holder-container > div
                 display flex
                 flex-direction column

@@ -19,7 +19,7 @@ const characterSource = {
     };
   },
   canDrag(props, monitor) {
-    return props.droppedItemId;
+    return props.droppedItemId >= 0;
   }
 };
 

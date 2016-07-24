@@ -8,7 +8,7 @@ class Header extends Component {
     }
 
     render() {
-        return <div style={style.container} className="header-container">
+        return <div className="header-container">
             <h4>GoT!</h4>
         </div> 
     }
@@ -17,12 +17,6 @@ class Header extends Component {
 
 const mapStateToProps = (state, ownProps) => { 
     return {}
-}
-
-const style = {
-    container: {
-        height: "10vh",
-    }
 }
 
 export default connect(mapStateToProps)(Header);

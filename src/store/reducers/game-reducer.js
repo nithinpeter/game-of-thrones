@@ -4,6 +4,7 @@ const defaultState = {
   isLoading: true,
   characterTree: {},
   characterHolderTree: {},
+  isFinished: false,
 };
 
 const itemDroppedState = (state, action) => {
@@ -13,10 +14,28 @@ const itemDroppedState = (state, action) => {
   })
   characterHolderTree[action.id].droppedItemId = action.droppedItemId;
 
+  let isFinished = false;
+
+  for (var i = 0; i < characterHolderTree.length; i++) {
+
+    if (!characterHolderTree[i].isPrimary) {
+
+      if (characterHolderTree[i].droppedItemId != characterHolderTree[i].id) {
+        isFinished = false;
+        break;
+
+      } else {
+        isFinished = true;
+      }
+
+    }
+
+  }
+
   let characterTree = [...state.characterTree];
   characterTree[action.droppedItemId].isDropped = true;
 
-  return {characterHolderTree, characterTree};
+  return {characterHolderTree, characterTree, isFinished};
 }
 
 const itemDroppedBackState = (state, {id}) => {
