@@ -43,8 +43,7 @@ const Config = {
         //     {from: __dirname + '/images', to: __dirname + '/build/images'}
         // ]),
         new HtmlWebpackPlugin({
-            // title: "Title goes here",
-            inject: path.join(__dirname, './src/index.html'),
+            template: path.join(__dirname, './src/template.ejs'),
         })
     ],
     devtool: "source-map"

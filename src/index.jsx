@@ -9,5 +9,5 @@ const appToRender = <Provider store={store}>
 </Provider>
 
 
-ReactDOM.render(appToRender, document.body);
+ReactDOM.render(appToRender, document.getElementById("app-container"));
 

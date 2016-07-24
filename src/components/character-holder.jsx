@@ -17,6 +17,9 @@ const characterSource = {
     return {
         id: props.droppedItemId
     };
+  },
+  canDrag(props, monitor) {
+    return props.droppedItemId;
   }
 };
 
@@ -60,7 +63,8 @@ const CharacterHolder = ({
 
             return <div>
                 <img src={character.imageUrl} className="image"/>
-                <span className="name">{character.name}</span>        
+                <span className="name">{character.name}</span>    
+                <span className="fa fa-check success"></span>        
             </div>
 
         } else {
@@ -70,7 +74,7 @@ const CharacterHolder = ({
             return <div>
                 <img src={character.imageUrl} className="image"/>
                 <span className="name">{character.name}</span>
-                <span className="error">X</span>        
+                <span className="fa fa-close error"></span>        
             </div>
         }
     }
