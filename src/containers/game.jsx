@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import PickCharacters from "./pick-characters";
 import CharactersDropZone from "./characters-drop-zone";
+import ControlCenter from "./control-center";
 import * as actions from "../store/actions";
 
 class Game extends Component {
@@ -11,15 +12,17 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        actions.fetchGame(this.props.dispatch, 1);
+        actions.fetchGame(this.props.dispatch, this.props.currentLevel);
     }
 
     render() {
-        const { isFinished, isLoading } = this.props;
+        const { isLoading, isFinished } = this.props;
 
-        return isFinished ? <div>Finished</div> : <div className="game-center">
+        return <div className="game-center">
             <CharactersDropZone />
             <PickCharacters />
+
+            { isFinished && <ControlCenter /> }
         </div>
     }
 
@@ -29,6 +32,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         isFinished: state.game.isFinished,
         isLoading: state.game.isLoading,
+        currentLevel: state.game.currentLevel,
     }
 }
 

@@ -4,7 +4,8 @@ const defaultState = {
   isLoading: true,
   characterTree: {},
   characterHolderTree: {},
-  isFinished: false,
+  isFinished: true,
+  currentLevel: 1,
 };
 
 const itemDroppedState = (state, action) => {
@@ -54,15 +55,19 @@ const itemDroppedBackState = (state, {id}) => {
 export default function todos(state = defaultState, action) {
   switch(action.type) {
     case actions.FETCH_GAME_REQUEST:
-      return { isLoading: true }
+      return Object.assign({}, state, { isLoading: true })
     case actions.FETCH_GAME_SUCCESS:
-      let gameData = Object.assign({}, { isLoading: false }, action.body)
-      gameData.characterHolderTree = action.body.characterTree;
-      return gameData;
+      return Object.assign({}, state, { 
+          isLoading: false,
+          characterHolderTree: action.body.characterTree,
+          characterTree: action.body.characterTree,
+      });
     case actions.ITEM_DROPPED:
       return Object.assign({}, state, itemDroppedState(state, action));
     case actions.ITEM_DROPPED_BACK:
       return Object.assign({}, state, itemDroppedBackState(state, action));
+    case actions.PLAY_NEXT_LEVEL:
+      return Object.assign({}, state, { isFinished: false });
     default:
       return state;
 

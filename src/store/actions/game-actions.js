@@ -7,6 +7,8 @@ export const FETCH_GAME_FAILURE = "FETCH_GAME_FAILURE";
 export const ITEM_DROPPED = "ITEM_DROPPED";
 export const ITEM_DROPPED_BACK = "ITEM_DROPPED_BACK";
 
+export const PLAY_NEXT_LEVEL = "PLAY_NEXT_LEVEL";
+
 export function fetchGame(dispatch, id) {
 
     dispatch({
@@ -37,5 +39,11 @@ export function itemDroppedBack(dispatch, id) {
     dispatch({
         type: ITEM_DROPPED_BACK,
         id,
+    })
+}
+
+export function playNextLevel(dispatch) {
+    dispatch({
+        type: PLAY_NEXT_LEVEL,
     })
 }
