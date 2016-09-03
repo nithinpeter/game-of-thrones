@@ -39,12 +39,20 @@ const Config = {
         ]
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compress:{
+                warnings: true
+            }
+        }),
         new CopyWebpackPlugin([
             {from: path.join(__dirname, './src/assets'), to: path.join(__dirname, './build/assets')}
         ]),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/template.ejs'),
-        })
+        }),
     ],
     devtool: "source-map"
 }
