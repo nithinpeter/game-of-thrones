@@ -16,7 +16,7 @@ class CharactersDropZone extends Component {
         const character = gameData[id];
         const relationships = character.relationships;
 
-        return <div className="character-drop-zone-inner-container">
+        return <div className="character-drop-zone-inner-container" key={"character_"+id}>
 
             <div className="character-holder-connector">
                 <CharacterHolder isPrimary={isPrimary}
@@ -30,7 +30,7 @@ class CharactersDropZone extends Component {
                     {
                         relationships && relationships.map((relationship, index) => {
                             return <CharacterConnector
-                                key={"connector_" + index}
+                                key={"connector_" + relationship.id}
                                 index={index}
                                 relationship={relationship}
                                 total={relationships ? relationships.length : 0}/>
@@ -41,7 +41,7 @@ class CharactersDropZone extends Component {
 
             <div className={"secondary-container children-" + (relationships ? relationships.length : 0) }>
                 { relationships ?
-                    character.relationships.map((item) => {
+                    relationships.map((item) => {
                         return this.renderCharacter(item.relatedTo, false)
                     }) : null
                 }
@@ -51,7 +51,7 @@ class CharactersDropZone extends Component {
 
     render() {
         const { gameData, isLoading } = this.props;
-
+        
         if (!isLoading) {
             const primaryCharacter = gameData.filter(character => character.isPrimary)[0];
 
