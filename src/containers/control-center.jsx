@@ -11,16 +11,18 @@ class ControlCenter extends Component {
     render() {
         const { isLoading, isFinished, currentLevel } = this.props;
 
-        return !isLoading && <div className="control-center">
+        return <div className="control-center">
             <div className="control-center-content">
-                <h1 className="header">Level {currentLevel}</h1>
+                {
+                    currentLevel == 1 ? <h1>Start Playing</h1> : <h1 className="header">Level {currentLevel}</h1>
+                }
                 <button className="primary-button" onClick={this.handlePlay.bind(this)}>PLAY</button>
             </div>
         </div> 
     }
 
     handlePlay() {
-        actions.playNextLevel(this.props.dispatch);
+        actions.fetchGame(this.props.dispatch, this.props.currentLevel);
     }
 
 }

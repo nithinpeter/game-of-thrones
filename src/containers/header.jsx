@@ -9,7 +9,7 @@ class Header extends Component {
 
     render() {
         return <div className="header-container">
-            <h4>GoT!</h4>
+            <img className="logo" src="/assets/images/got-logo.png" alt=""/>
         </div> 
     }
 

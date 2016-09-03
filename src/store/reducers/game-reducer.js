@@ -15,7 +15,7 @@ const itemDroppedState = (state, action) => {
   })
   characterHolderTree[action.id].droppedItemId = action.droppedItemId;
 
-  let isFinished = false;
+  let isFinished = false, currentLevel = state.currentLevel;
 
   for (var i = 0; i < characterHolderTree.length; i++) {
 
@@ -36,7 +36,9 @@ const itemDroppedState = (state, action) => {
   let characterTree = [...state.characterTree];
   characterTree[action.droppedItemId].isDropped = true;
 
-  return {characterHolderTree, characterTree, isFinished};
+  if(isFinished) currentLevel++;
+
+  return {characterHolderTree, characterTree, isFinished, currentLevel};
 }
 
 const itemDroppedBackState = (state, {id}) => {
@@ -55,7 +57,7 @@ const itemDroppedBackState = (state, {id}) => {
 export default function todos(state = defaultState, action) {
   switch(action.type) {
     case actions.FETCH_GAME_REQUEST:
-      return Object.assign({}, state, { isLoading: true })
+      return Object.assign({}, state, { isLoading: true, isFinished: false })
     case actions.FETCH_GAME_SUCCESS:
       return Object.assign({}, state, { 
           isLoading: false,

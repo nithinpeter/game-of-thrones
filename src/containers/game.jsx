@@ -12,7 +12,7 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        actions.fetchGame(this.props.dispatch, this.props.currentLevel);
+        // actions.fetchGame(this.props.dispatch, this.props.currentLevel);
     }
 
     render() {

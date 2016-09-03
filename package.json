@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack ./build/bundle.js -p",
-    "dev": "webpack ./build/bundle.js -d -w"
+    "dev": "webpack ./build/bundle.js -d -w --port 4000"
   },
   "author": "",
   "license": "ISC",

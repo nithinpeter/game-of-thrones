@@ -39,9 +39,9 @@ const Config = {
         ]
     },
     plugins: [
-        // new CopyWebpackPlugin([
-        //     {from: __dirname + '/images', to: __dirname + '/build/images'}
-        // ]),
+        new CopyWebpackPlugin([
+            {from: path.join(__dirname, './src/assets'), to: path.join(__dirname, './build/assets')}
+        ]),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, './src/template.ejs'),
         })
