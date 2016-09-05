@@ -1,4 +1,5 @@
 require('babel-register')();
+require('./helpers/chaiEnzymeSetup');
 
 var jsdom = require('jsdom').jsdom;
 

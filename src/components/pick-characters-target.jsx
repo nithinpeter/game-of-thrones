@@ -20,7 +20,7 @@ function collect(connect, monitor) {
 const PickCharactersTarget = ({ 
         gameData,
         connectDropTarget, 
-        isDragging,
+        isOver,
       }) => {
 
     return connectDropTarget(<div className="pick-character-container">

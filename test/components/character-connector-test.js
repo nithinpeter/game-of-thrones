@@ -4,12 +4,12 @@ import { shallow, mount, render } from "enzyme";
 import CharacterConnector from "../../src/components/character-connector";
 import wrapInTestContext from "../helpers/wrapInTestContext";
 
-
 describe("Character Connector Component", function() {
 
   var CharacterConnectorComponent = wrapInTestContext(CharacterConnector);
 
   it("should render relationship", function() {
-    expect(mount(<CharacterConnectorComponent relationship={{ type: "father" }} index={0} total={1}/>).contains("FATHER")).to.equal(true);
+    const wrapper = mount(<CharacterConnectorComponent relationship={{ type: "father" }} index={0} total={1}/>);
+    expect(wrapper).to.have.text("FATHER");
   });
 });

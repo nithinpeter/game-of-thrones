@@ -4,7 +4,6 @@ import { shallow, mount, render } from 'enzyme';
 import Character from '../../src/components/character';
 import wrapInTestContext from '../helpers/wrapInTestContext'
 
-
 describe("Character Component", function() {
 
   var CharacterComponent = wrapInTestContext(Character);
