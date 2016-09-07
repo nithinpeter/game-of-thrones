@@ -6,7 +6,7 @@ import CharacterConnector from "../components/character-connector";
 import Loader from "../components/loader";
 import * as actions from "../store/actions";
 
-class CharactersDropZone extends Component {
+export class CharactersDropZone extends Component {
     constructor(props) {
         super(props);
     }

@@ -6,7 +6,7 @@ import CharactersDropZone from "./characters-drop-zone";
 import ControlCenter from "./control-center";
 import * as actions from "../store/actions";
 
-class Game extends Component {
+export class Game extends Component {
     constructor(props) {
         super(props);
     }

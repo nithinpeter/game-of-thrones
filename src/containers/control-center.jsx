@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import * as actions from "../store/actions";
 
-class ControlCenter extends Component {
+export class ControlCenter extends Component {
     constructor(props) {
         super(props);
     }

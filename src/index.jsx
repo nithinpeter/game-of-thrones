@@ -1,3 +1,6 @@
+import coreStyle from "./styles/core.styl";
+import appStyle from "./styles/app.styl";
+
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";

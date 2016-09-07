@@ -6,10 +6,8 @@ import wrapInTestContext from "../helpers/wrapInTestContext";
 
 describe("Character Connector Component", function() {
 
-  var CharacterConnectorComponent = wrapInTestContext(CharacterConnector);
-
   it("should render relationship", function() {
-    const wrapper = mount(<CharacterConnectorComponent relationship={{ type: "father" }} index={0} total={1}/>);
+    const wrapper = shallow(<CharacterConnector relationship={{ type: "father" }} index={0} total={1}/>);
     expect(wrapper).to.have.text("FATHER");
   });
 });

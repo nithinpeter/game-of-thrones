@@ -5,7 +5,7 @@ import PickCharactersTarget from "../components/pick-characters-target";
 import * as actions from "../store/actions";
 
 // @DropTarget(c.ItemTypes.CHARACTER, pickCharactersTarget, collect)
-class PickCharacters extends Component {
+export class PickCharacters extends Component {
     constructor(props) {
         super(props);
     }
