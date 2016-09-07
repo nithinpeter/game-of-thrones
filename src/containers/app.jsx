@@ -4,16 +4,23 @@ import appStyle from "../styles/app.styl";
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import { connect } from "react-redux";
-import Game from "../containers/game";
-import Header from "../containers/header";
+import Game from "./game";
+import Header from "./header";
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
-const App = () => {
-    return <div style={style.container} className="app-container">
-        <Header />
-        <Game />
-    </div>
+class App extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    render() { 
+        return <div style={style.container } className="app-container" >
+            <Header />
+            <Game />
+        </div>
+    }
 }
 
 const style = {

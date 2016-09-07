@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { connect } from "react-redux";
 import CharacterHolder from "../components/character-holder";
 import CharacterConnector from "../components/character-connector";
+import Loader from "../components/loader";
 import * as actions from "../store/actions";
 
 class CharactersDropZone extends Component {
@@ -50,7 +51,7 @@ class CharactersDropZone extends Component {
     }
 
     render() {
-        const { gameData, isLoading } = this.props;
+        const { gameData, isLoading, isFinished } = this.props;
         
         if (!isLoading) {
             const primaryCharacter = gameData.filter(character => character.isPrimary)[0];
@@ -58,9 +59,7 @@ class CharactersDropZone extends Component {
             return <div className="character-drop-zone"> { this.renderCharacter(primaryCharacter.id, true) } </div>
 
         } else {
-            return <div>
-                Loading..
-            </div>
+            return !isFinished && <Loader />
         }
 
     }
@@ -76,6 +75,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         gameData: state.game.characterHolderTree,
         isLoading: state.game.isLoading,
+        isFinished: state.game.isFinished,
     }
 }
 

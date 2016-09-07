@@ -4,7 +4,7 @@ import env from "../helpers/env";
 
 const store = createStore(
     rootReducer,
-    // env.isDev() ? window.devToolsExtension && window.devToolsExtension() : null
+    window.devToolsExtension && window.devToolsExtension()
 );
 // applyMiddleware(thunkMiddleware, callApiMiddleware)ß
 
